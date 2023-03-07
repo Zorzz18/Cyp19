@@ -34,7 +34,7 @@ describe("login tests", () => {
 
 
         });
-        
+
 
 
 
@@ -52,14 +52,29 @@ describe("login tests", () => {
 
 
     it ("login with valid credentials", () => {
-        cy.visit("https://gallery-app.vivifyideas.com/");
+        cy.visit("/login");
         // cy.get("a[href='/login']").click();
         cy.get(" .nav-link").eq(1).click();
         cy.get("#email").type("djordje123@gmail.com");
         cy.get("#password").type("123djordje");
         cy.get("button").click();
+        cy.url().should("not.contain", "/login");
         
     });
+
+    it.only("logout", () => {
+        cy.visit("/");
+            cy.get(".nav-link").eq(1).click();
+            cy.get("#email").type("djordje123@gmail.com");
+            cy.get("#password").type("123djordje");
+            cy.get("button").click();
+            cy.url().should("not.contain", "/login");
+            cy.get(".nav-link").eq(3).click();
+    });
+
+
+
+
 });
 
 {
