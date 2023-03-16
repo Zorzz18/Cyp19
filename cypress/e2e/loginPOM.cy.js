@@ -24,4 +24,19 @@ describe("login tests using POM", () => {
 
 
   });
+  it.only("login with valid credentials", () => {
+    cy.intercept({
+      method:"POST",
+      url: "https://gallery-api.vivifyideas.com/api/auth/login",
+    }).as("validLogin");
+
+    loginPage.login("djordje123@gmail.com", "123djordje");
+    cy.wait("@validLogin").then((interception) => {
+      console.log(interception);
+      expect(interception.response.statusCode).not.to.be.equal(401);
+      expect(interception.response.statusCode).to.be.equal(200);
+      expect(interception.response.body.access_token).to.exist;
+    });
+    cy.url().should("not.contain", "/login");
+  });
 });

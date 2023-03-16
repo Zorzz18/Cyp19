@@ -1,13 +1,11 @@
 /// <reference types="Cypress" />
 import { allGalleriesPage } from "../page_objects/allGalleries";
-import { loginPage } from "../page_objects/loginPage";
+
 
 
 describe("all galleries page tests", () => {
   beforeEach("visit gallery app and log in", () => {
-    cy.loginViaBackend();
-    cy.visit("/")
-    
+    cy.registerViaBackend("djordjedjole@gmail.com", "Dole", "testtest", "probna12345", "probna12345", true)
     // cy.visit("/login");
     // loginPage.login("nedovic.filip@gmail.com", "Test12345");
     // cy.url().should("not.include", "/login");
